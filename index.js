@@ -6,30 +6,39 @@ const DEBUG = process.env.DEBUG || false
 
 // Express
 let app = express()
+app.use(express.json())
 
-// The endpoint
-app.post('/', function (req, res) {
-    res.setHeader('Content-Type', 'application/json')
-    
-    // TODO: obtain the variables below from req
-    let dice = 10 // The number of dice to launch
-    let faces = 6 // The faces of each dice
+/**
+ * Simply launches some dice
+ * @argument {object} slots The slots of the intent request
+ * @returns {string} Alexa answer
+ */
+throwDice = slots => {
+    let dice = slots.dice && slots.dice.value ? parseInt(slots.dice.value) : 1 // Default is one dice
+    let faces = slots.faces && slots.faces.value ? parseInt(slots.faces.value) : 4 // and 4 faces
 
     let results = new Array(dice)
         .fill(0) // Just create an array full of zeros
         .map(() => 1 + Math.floor(Math.random() * Math.floor(faces))) // Launch the dice!
-        .join() // Convert to comma separated string
+        .join(' ') // Convert to space separated string
+    return 'Ok, ho ottenuto ' + results
+}
 
-    let answer = {
-        italian: 'Ok, ho ottenuto ' + results,
+// The endpoint
+app.post('/', (req, res) => {
+    let alexaReq = req.body.request
+    switch (alexaReq.type) {
+        case 'LaunchRequest': answer = 'Ok, dimmi quanti dadi lanciare!'
+        case 'IntentRequest': if (alexaReq.intent.name == 'diceLaunchIntent') answer = throwDice(alexaReq.intent.slots)
     }
 
+    res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify({
         version: "1.0",
         response: {
             outputSpeech: {
                 type: "PlainText",
-                text: answer.italian
+                text: answer
             }
         }
     }))
