@@ -20,7 +20,7 @@ throwDice = slots => {
     let results = new Array(dice)
         .fill(0) // Just create an array full of zeros
         .map(() => 1 + Math.floor(Math.random() * Math.floor(faces))) // Launch the dice!
-        .join('<break time="1s"/>') // Add little pauses to let the user understand all the numbers
+        .join('<break time="500ms"/>') // Add little pauses to let the user understand all the numbers
     return 'Ok, ho ottenuto ' + results
 }
 
