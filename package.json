@@ -12,11 +12,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "express": "^4.16.4",
-    "pg": "^7.6.0",
-    "request": "^2.88.0",
-    "uuid": "^3.3.2"
+    "express": "^4.16.4"
   },
   "devDependencies": {},
   "scripts": {
@@ -26,7 +22,7 @@
     "node",
     "heroku",
     "express",
-    "medium"
+    "dice"
   ],
   "license": "ISC",
   "author": "Silvio Biasiol"
