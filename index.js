@@ -14,8 +14,14 @@ app.use(express.json())
  * @returns {string} Alexa answer
  */
 throwDice = slots => {
-    let dice = slots.dice && slots.dice.value ? parseInt(slots.dice.value) : 1 // Default is one dice
-    let faces = slots.faces && slots.faces.value ? parseInt(slots.faces.value) : 4 // and 4 faces
+    let dice, faces
+    try { // Avoid getting invalid numbers
+        dice = slots.dice && slots.dice.value ? parseInt(slots.dice.value) : 1 // Default is one dice
+        faces = slots.faces && slots.faces.value ? parseInt(slots.faces.value) : 4 // and 4 faces
+    } catch (e) {
+        dice = 1
+        faces = 4
+    }
 
     let results = new Array(dice)
         .fill(0) // Just create an array full of zeros
