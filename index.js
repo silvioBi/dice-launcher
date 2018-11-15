@@ -20,7 +20,7 @@ throwDice = slots => {
     let results = new Array(dice)
         .fill(0) // Just create an array full of zeros
         .map(() => 1 + Math.floor(Math.random() * Math.floor(faces))) // Launch the dice!
-        .join(' ') // Convert to space separated string
+        .join('<break time="1s"/>') // Add little pauses to let the user understand all the numbers
     return 'Ok, ho ottenuto ' + results
 }
 
@@ -37,8 +37,8 @@ app.post('/', (req, res) => {
         version: "1.0",
         response: {
             outputSpeech: {
-                type: "PlainText",
-                text: answer
+                type: "SSML",
+                ssml: '<speak>' + answer + '</speak>'
             }
         }
     }))
