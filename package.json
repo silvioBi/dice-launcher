@@ -1,0 +1,33 @@
+{
+  "name": "launch-dice",
+  "version": "0.1.0",
+  "description": "Launches multiple dice with 3 or more faces",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/silvioBi/dice-launcher"
+  },
+  "engines": {
+    "node": "10.x",
+    "npm": "6.4.x"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "pg": "^7.6.0",
+    "request": "^2.88.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "medium"
+  ],
+  "license": "ISC",
+  "author": "Silvio Biasiol"
+}
