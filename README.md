@@ -1,6 +1,5 @@
-# dice-launcher
+# 🎲 dice-launcher
 
-This is a very basic launcher.
+This is a simple dice launcher, it is used as for italian "Dadi" Alexa skill :)
 
-🚀  Live version [here](https://medium-italy-news.herokuapp.com/)
 
