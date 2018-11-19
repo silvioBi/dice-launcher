@@ -1,4 +1,5 @@
 const express = require('express')
+const verifier = require('alexa-verifier-middleware')
 
 // Enviroment variables
 const PORT = process.env.PORT || 80
@@ -6,6 +7,7 @@ const DEBUG = process.env.DEBUG || false
 
 // Express
 let app = express()
+app.use(verifier)
 app.use(express.json())
 
 /**
