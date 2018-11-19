@@ -12,6 +12,7 @@
   },
   "main": "index.js",
   "dependencies": {
+    "alexa-verifier-middleware": "^1.0.1",
     "express": "^4.16.4"
   },
   "devDependencies": {},
