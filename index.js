@@ -7,7 +7,9 @@ const DEBUG = process.env.DEBUG || false
 
 // Express
 let app = express()
+// Middleware to verify the Signature Certificate URL of Alexa
 app.use(verifier)
+// Middleware to parse JSON payloads
 app.use(express.json())
 
 /**
@@ -34,10 +36,15 @@ throwDice = slots => {
 
 // The endpoint
 app.post('/', (req, res) => {
-    let alexaReq = req.body.request
-    switch (alexaReq.type) {
-        case 'LaunchRequest': answer = 'Ok, dimmi quanti dadi lanciare!'
-        case 'IntentRequest': if (alexaReq.intent.name == 'diceLaunchIntent') answer = throwDice(alexaReq.intent.slots)
+    let answer = ''
+    try {
+        let alexaReq = req.body.request
+        switch (alexaReq.type) {
+            case 'LaunchRequest': answer = 'Ok, dimmi quanti dadi lanciare!'
+            case 'IntentRequest': if (alexaReq.intent.name == 'diceLaunchIntent') answer = throwDice(alexaReq.intent.slots)
+        }
+    } catch(e) {
+        answer = 'Non ho capito'
     }
 
     res.setHeader('Content-Type', 'application/json')
